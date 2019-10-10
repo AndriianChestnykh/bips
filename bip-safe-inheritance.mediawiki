@@ -1,0 +1,57 @@
+<pre>
+  BIP: ???
+  Layer: Applications
+  Title: Safe Inheritance
+  Author:
+  Comments-Summary:
+  Comments-URI:
+  Status: Draft
+  Type:
+  Created:
+  License:
+</pre>
+
+==Introduction==
+
+Secure and convenient Bitcoin transfer from owner to heir in case of accident. No third party dependency.
+
+===Abstract===
+
+===Copyright===
+
+===Motivation===
+
+==Specification==
+
+Data to transfer between owner and heir wallets:
+<pre>
+[
+    {
+        "tx": "<binary data of signed transaction>",
+        "redeemScriptsForEachTxOutput": [
+            {
+                "output": 0,
+                "<binary data>"
+            },
+            {
+                "output": 1,
+                "<binary data>"
+            }
+         ]
+    },
+    {
+        "tx": "<binary data>",
+        ...
+    },
+    ...
+]
+</pre>
+
+Redeem script example
+<pre>
+OP_IF
+    <Alice's Public Key> OP_CHECKSIG
+OP_ELSE
+    <N days> OP_CSV DROP <Bob's Public Key> OP_CHECKSIG
+OP_ENDIF
+</pre>
